@@ -6,27 +6,21 @@
             rows = <5>;
             columns = <8>;
 
-            // -1 = keine Taste in diesem Slot
             map = <
-                // Row 0
                 0  1  2  3  4  5  6  -1
-                // Row 1
                 7  8  9 10 11 12 13 -1
-                // Row 2
                 14 15 16 17 18 19 20 21
-                // Row 3
                 22 23 24 25 26 27 28 29
-                // Row 4
                 30 31 32 33 34 35 36 37
             >;
         };
 
         default_layer {
             bindings = <
-                &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Z     &kp U     &none
-                &kp A     &kp S     &kp D     &kp F     &kp G     &kp H     &kp J     &none
-                &kp Y     &kp X     &kp C     &kp V     &kp B     &kp N     &kp M     &kp COMMA
-                &kp TAB   &kp LSHFT &kp LCTRL &kp SPACE &kp ENTER &kp RALT &kp RSHFT &kp DOT
+                &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Z     &kp U      &none
+                &kp A     &kp S     &kp D     &kp F     &kp G     &kp H     &kp J      &none
+                &kp Y     &kp X     &kp C     &kp V     &kp B     &kp N     &kp M      &kp COMMA
+                &kp TAB   &kp LSHFT &kp LCTRL &kp SPACE &kp ENTER &kp RALT  &kp RSHFT  &kp DOT
                 &kp ESC   &kp LGUI  &kp MINUS &kp EQUAL &kp KP_PLUS &kp KP_MINUS &kp SLASH &kp BACKSPACE
             >;
         };
