@@ -1,0 +1,27 @@
+/ {
+    compatible = "zmk,keyboard";
+
+    chosen {
+        zmk,keyboard = &kscan0;
+    };
+
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-matrix";
+        diode-direction = "col2row";
+
+        row-gpios = < &gpio0 5 GPIO_ACTIVE_HIGH >,   /* D5 */
+                    < &gpio0 6 GPIO_ACTIVE_HIGH >,   /* D6 */
+                    < &gpio0 7 GPIO_ACTIVE_HIGH >,   /* D7 */
+                    < &gpio0 8 GPIO_ACTIVE_HIGH >,   /* D8 */
+                    < &gpio0 9 GPIO_ACTIVE_HIGH >;   /* D9 */
+
+        col-gpios = < &gpio0 21 GPIO_ACTIVE_HIGH >,  /* D21 */
+                    < &gpio0 20 GPIO_ACTIVE_HIGH >,  /* D20 */
+                    < &gpio0 19 GPIO_ACTIVE_HIGH >,  /* D19 */
+                    < &gpio0 18 GPIO_ACTIVE_HIGH >,  /* D18 */
+                    < &gpio0 15 GPIO_ACTIVE_HIGH >,  /* D15 */
+                    < &gpio0 14 GPIO_ACTIVE_HIGH >,  /* D14 */
+                    < &gpio0 16 GPIO_ACTIVE_HIGH >,  /* D16 */
+                    < &gpio0 10 GPIO_ACTIVE_HIGH >;  /* D10 */
+    };
+};
