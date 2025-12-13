@@ -20,6 +20,6 @@
 ---
 include:
   - board: nice_nano@2.0.0
-    shield: iris_left
+    shield: mwv1_left
   - board: nice_nano@2.0.0
-    shield: iris_right
+    shield: mwv1_right
