@@ -1,27 +1,22 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+
 / {
     keymap {
         compatible = "zmk,keymap";
 
-        matrix_transform {
-            rows = <5>;
-            columns = <8>;
-
-            map = <
-                0  1  2  3  4  5  6  -1
-                7  8  9 10 11 12 13 -1
-                14 15 16 17 18 19 20 21
-                22 23 24 25 26 27 28 29
-                30 31 32 33 34 35 36 37
-            >;
-        };
-
         default_layer {
             bindings = <
-                &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Z     &kp U      &none
-                &kp A     &kp S     &kp D     &kp F     &kp G     &kp H     &kp J      &none
-                &kp Y     &kp X     &kp C     &kp V     &kp B     &kp N     &kp M      &kp COMMA
-                &kp TAB   &kp LSHFT &kp LCTRL &kp SPACE &kp ENTER &kp RALT  &kp RSHFT  &kp DOT
-                &kp ESC   &kp LGUI  &kp MINUS &kp EQUAL &kp KP_PLUS &kp KP_MINUS &kp SLASH &kp BACKSPACE
+                // Row 0 (8 Positionen, letzte existiert physisch nicht -> &none)
+                &kp Q       &kp W       &kp E       &kp R       &kp T       &kp Z       &kp U       &none
+                // Row 1 (ebenfalls letzte Position leer)
+                &kp A       &kp S       &kp D       &kp F       &kp G       &kp H       &kp J       &none
+                // Row 2
+                &kp Y       &kp X       &kp C       &kp V       &kp B       &kp N       &kp M       &kp COMMA
+                // Row 3
+                &kp TAB     &kp LSHFT   &kp LCTRL   &kp SPACE   &kp ENTER   &kp RALT    &kp RSHFT   &kp DOT
+                // Row 4
+                &kp ESC     &kp LGUI    &kp MINUS   &kp EQUAL   &kp KP_PLUS &kp KP_MINUS &kp SLASH  &kp BACKSPACE
             >;
         };
     };
