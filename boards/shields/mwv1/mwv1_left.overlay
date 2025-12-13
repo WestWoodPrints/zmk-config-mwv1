@@ -1,0 +1,6 @@
+#include "mwv1.dtsi"
+
+&kscan0 {
+    status = "okay";
+    label = "MWV1 LEFT";
+};
