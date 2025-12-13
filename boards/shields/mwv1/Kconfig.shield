@@ -1,0 +1,5 @@
+config SHIELD_MWV1_LEFT
+    bool "MWV1 Left"
+
+config SHIELD_MWV1_RIGHT
+    bool "MWV1 Right"
