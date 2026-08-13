@@ -1,0 +1,12 @@
+file_format: "1"
+id: mwv1
+name: MWV1
+type: shield
+url: https://github.com/WestWoodPrints/zmk-config-mwv1
+requires: [pro_micro]
+features:
+  - keys
+  - studio
+siblings:
+  - mwv1_left
+  - mwv1_right

@@ -1,0 +1,16 @@
+if SHIELD_MWV1_LEFT
+
+config ZMK_KEYBOARD_NAME
+    default "MWV1"
+
+config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+
+endif
+
+if SHIELD_MWV1_LEFT || SHIELD_MWV1_RIGHT
+
+config ZMK_SPLIT
+    default y
+
+endif

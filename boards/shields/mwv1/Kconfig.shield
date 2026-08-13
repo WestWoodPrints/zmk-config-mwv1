@@ -1,5 +1,5 @@
 config SHIELD_MWV1_LEFT
-    bool "MWV1 Left"
+    def_bool $(shields_list_contains,mwv1_left)
 
 config SHIELD_MWV1_RIGHT
-    bool "MWV1 Right"
+    def_bool $(shields_list_contains,mwv1_right)
