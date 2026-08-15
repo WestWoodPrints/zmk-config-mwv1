@@ -24,25 +24,25 @@ That is 38 keys per half and 76 keys for the complete keyboard. The logical key 
 
 ### Controller pin mapping
 
-The KiCad symbol names RP2040 GPIOs, while ZMK addresses the physical Pro Micro interconnect. Because the nice!nano is fitted to the reversible footprint with its USB end aligned to the controller end of the PCB, the effective mapping is:
+The KiCad symbol names RP2040 GPIOs, while ZMK addresses the physical Pro Micro interconnect. The effective mapping below was verified by continuity measurements from every matrix net to the nice!nano pins on the assembled reversible PCB:
 
 | KiCad net | KiCad U1 pad / RP2040 label | ZMK Pro Micro pin | nice!nano v2 GPIO |
 |---|---|---:|---|
-| R0 | 23 / GP26 | 5 | P0.24 |
-| R1 | 22 / GP22 | 6 | P1.00 |
-| R2 | 21 / GP20 | 7 | P0.11 |
-| R3 | 20 / GP23 | 8 | P1.04 |
-| R4 | 19 / GP21 | 9 | P1.06 |
-| C0 | 6 / GP2 | 21 | P0.31 |
-| C1 | 7 / GP3 | 20 | P0.29 |
-| C2 | 8 / GP4 | 19 | P0.02 |
-| C3 | 9 / GP5 | 18 | P1.15 |
-| C4 | 10 / GP6 | 15 | P1.13 |
-| C5 | 11 / GP7 | 14 | P1.11 |
-| C6 | 12 / GP8 | 16 | P0.10 |
-| C7 | 13 / GP9 | 10 | P0.09 |
+| R0 | 23 / GP26 | 18 | P1.15 |
+| R1 | 22 / GP22 | 15 | P1.13 |
+| R2 | 21 / GP20 | 14 | P1.11 |
+| R3 | 20 / GP23 | 16 | P0.10 |
+| R4 | 19 / GP21 | 10 | P0.09 |
+| C0 | 6 / GP2 | 2 | P0.17 |
+| C1 | 7 / GP3 | 3 | P0.20 |
+| C2 | 8 / GP4 | 4 | P0.22 |
+| C3 | 9 / GP5 | 5 | P0.24 |
+| C4 | 10 / GP6 | 6 | P1.00 |
+| C5 | 11 / GP7 | 7 | P0.11 |
+| C6 | 12 / GP8 | 8 | P1.04 |
+| C7 | 13 / GP9 | 9 | P1.06 |
 
-The left overlay scans columns as `21, 20, 19, 18, 15, 14, 16, 10`. The right PCB is viewed from its opposite side, so its physical left-to-right order is `10, 16, 14, 15, 18, 19, 20, 21`. The right transform adds a column offset of eight. In the first two rows, the transform skips the absent inner `C7` position on each half.
+The left overlay scans the columns from the outside toward the inside as `2, 3, 4, 5, 6, 7, 8, 9`. The mirrored right PCB is read in physical left-to-right order, so its overlay reverses the sequence to `9, 8, 7, 6, 5, 4, 3, 2`. The right transform adds a column offset of eight. In the first two rows, the transform skips the absent inner `C7` position on each half.
 
 ### Important: no matrix diodes
 
