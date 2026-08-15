@@ -125,3 +125,5 @@ The normal and diagnostic firmware use ZMK's conservative BLE connection mode an
 ## Matrix USB logging
 
 The `mwv1_left_debug` artifact replaces Studio with ZMK USB logging on the central half. It keeps the real matrix, split, keymap, USB HID, and Bluetooth configuration. Use it temporarily when no key presses are detected, then capture the serial output while pressing keys. Reflash the normal `mwv1_left` artifact after diagnosis to restore ZMK Studio.
+
+The `mwv1_right_debug` artifact keeps the right half in peripheral mode while exposing its matrix and split logs over USB. It is used to distinguish a local right-side matrix problem from a missing split BLE connection. Reflash the normal `mwv1_right` artifact after diagnosis.
