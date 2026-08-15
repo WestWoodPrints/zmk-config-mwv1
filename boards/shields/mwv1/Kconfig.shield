@@ -3,3 +3,6 @@ config SHIELD_MWV1_LEFT
 
 config SHIELD_MWV1_RIGHT
     def_bool $(shields_list_contains,mwv1_right)
+
+config SHIELD_MWV1_BLE_TEST
+    def_bool $(shields_list_contains,mwv1_ble_test)

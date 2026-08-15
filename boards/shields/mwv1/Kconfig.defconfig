@@ -8,6 +8,13 @@ config ZMK_SPLIT_ROLE_CENTRAL
 
 endif
 
+if SHIELD_MWV1_BLE_TEST
+
+config ZMK_KEYBOARD_NAME
+    default "MWV1 BLE TEST"
+
+endif
+
 if SHIELD_MWV1_LEFT || SHIELD_MWV1_RIGHT
 
 config ZMK_SPLIT

@@ -14,3 +14,8 @@ include:
   - board: nice_nano//zmk
     shield: settings_reset
     artifact-name: settings_reset
+
+  # Dieses Minimalabbild prüft BLE und USB ohne Matrix, Split oder Studio.
+  - board: nice_nano//zmk
+    shield: mwv1_ble_test
+    artifact-name: mwv1_ble_test

@@ -1,0 +1,12 @@
+#include <behaviors.dtsi>
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        test_layer {
+            /* Für den reinen Funk- und USB-Test wird keine Taste benötigt. */
+            bindings = <&none>;
+        };
+    };
+};

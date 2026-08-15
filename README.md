@@ -108,3 +108,14 @@ If the two halves no longer connect:
 5. Remove the old host entry and pair `MWV1` again.
 
 Settings reset is intentionally a separate temporary firmware. Always reflash the correct left/right firmware afterward.
+
+## BLE controller smoke test
+
+The `mwv1_ble_test` artifact starts Bluetooth and USB without configuring matrix GPIOs, split communication, or ZMK Studio. It advertises as `MWV1 BLE TEST` and is intended only for diagnosis.
+
+1. Flash `settings_reset` to the controller under test.
+2. Flash `mwv1_ble_test` immediately afterward.
+3. Keep the controller powered by USB or a charged battery.
+4. Search for `MWV1 BLE TEST` from both a phone and the host computer.
+
+If the test name is not visible to either device, the failure is independent of the keyboard matrix and split configuration. Reflash `mwv1_left` after completing the test.

@@ -1,0 +1,26 @@
+#include <dt-bindings/zmk/matrix_transform.h>
+
+/ {
+    chosen {
+        zmk,kscan = &ble_test_kscan;
+        zmk,matrix-transform = &ble_test_transform;
+    };
+
+    /*
+     * Der Mock-Scanner berührt keine GPIOs. Dadurch prüft dieses Abbild
+     * ausschließlich den Controller, den USB-Stack und die BLE-Werbung.
+     */
+    ble_test_kscan: kscan {
+        compatible = "zmk,kscan-mock";
+        rows = <1>;
+        columns = <1>;
+        events = <>;
+    };
+
+    ble_test_transform: matrix_transform {
+        compatible = "zmk,matrix-transform";
+        rows = <1>;
+        columns = <1>;
+        map = <RC(0,0)>;
+    };
+};
