@@ -119,3 +119,5 @@ The `mwv1_ble_test` artifact starts Bluetooth and USB without configuring matrix
 4. Search for `MWV1 BLE TEST` from both a phone and the host computer.
 
 If the test name is not visible to either device, the failure is independent of the keyboard matrix and split configuration. Reflash `mwv1_left` after completing the test.
+
+The normal and diagnostic firmware use ZMK's conservative BLE connection mode and disable strict GATT subscription enforcement to improve compatibility with Windows hosts. Passkey entry remains disabled.
