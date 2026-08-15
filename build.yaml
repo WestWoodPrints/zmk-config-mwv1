@@ -19,3 +19,9 @@ include:
   - board: nice_nano//zmk
     shield: mwv1_ble_test
     artifact-name: mwv1_ble_test
+
+  # Dieses Abbild protokolliert Matrix- und Tastenereignisse über USB.
+  - board: nice_nano//zmk
+    shield: mwv1_left
+    snippet: zmk-usb-logging
+    artifact-name: mwv1_left_debug
