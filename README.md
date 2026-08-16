@@ -54,9 +54,22 @@ A diode-less 5×8 matrix can ghost for some three-or-more-key combinations. Firm
 
 - `mwv1_left` is the central and runs the keymap, USB HID, Bluetooth host connection, and ZMK Studio.
 - `mwv1_right` is a BLE peripheral and sends key positions to the central.
-- ZMK's five standard Bluetooth profiles are available on the Function layer.
-- Hold either `FN` key to reach the Function layer. Its left top row contains `BT CLR`, profiles 0–4, and `Studio Unlock`.
-- The Function layer also contains explicit `OUT USB` and `OUT BLE` keys.
+- Hold the `FN` key on the lower right to reach the Function layer. The number keys `1` through `0`, `ß`, and `´` produce `F1` through `F12`.
+- ZMK's five Bluetooth profiles, `BT CLR`, USB/BLE output selection, media controls, and display brightness are available on the Function layer.
+- The base layer also has a dedicated USB-output key so ZMK Studio can be selected without first entering another layer.
+
+## Keymap
+
+The base layer follows the physical positions of a German ISO layout. The operating system must therefore use a German keyboard layout; Shift and AltGr then produce the standard ISO-DE legends.
+
+| Layer | Hold key | Main assignments |
+|---|---|---|
+| Base | — | ISO-DE typing, `Page Up`, `Page Down`, `Home`, `End`, screenshot, context menu, direct USB output, and Studio unlock |
+| Navigation | `Arrow Key Layer` | `I/J/K/L` = up/left/down/right; `U/O` = Home/End; `P/Ü` = Page Up/Page Down |
+| Mouse | `Mouse Control` | `I/J/K/L` move; `U/O/H` left/right/middle click; `W/A/S/D` scroll; `Z/P` browser back/forward |
+| Function | `FN` | `F1`–`F12`, Bluetooth profiles, output selection, media controls, brightness, Studio unlock, and bootloader |
+
+The five positions that were empty in `keyboard-layout.json` are assigned to Studio unlock, screenshot, an additional Backspace, direct USB output, and the context menu. The labels `Layer Up` and `Layer Down` from the original JSON are treated as `Page Up` and `Page Down` (German `Bild auf`/`Bild ab`).
 
 ## Building
 
@@ -64,6 +77,7 @@ Push the repository to GitHub. `.github/workflows/build.yml` invokes the current
 
 - `mwv1_left` — central firmware with ZMK Studio over USB
 - `mwv1_right` — BLE peripheral firmware
+- `mwv1_left_studio_recovery` — temporary central firmware with Studio locking disabled
 - `settings_reset` — settings-reset firmware for the nice!nano v2
 
 The left-side equivalent local command is:
@@ -91,9 +105,22 @@ The peripheral does not act as a USB keyboard. USB host output and ZMK Studio be
 
 ## ZMK Studio
 
-Connect the left half over USB, select USB output on the Function layer, and invoke `Studio Unlock` on that layer. Then open [ZMK Studio](https://zmk.studio/) in Chrome or Edge. The physical layout contains all 76 positions in the same order as the matrix transform and keymap.
+Only the normal `mwv1_left` artifact contains the Studio USB transport. Flash that artifact to the left half; the debug artifact intentionally replaces Studio with USB logging.
+
+1. Connect the left half directly over a data-capable USB cable.
+2. Press the dedicated `USB Output` key on the base layer (lower row, second key after Enter).
+3. Open [ZMK Studio](https://zmk.studio/) in Chrome or Edge and select the keyboard's serial device.
+4. When Studio requests permission to edit, press the dedicated `Studio Unlock` key (far-left key of the third row). `FN` + `^` is a second unlock binding.
+
+The physical layout contains all 76 positions in the same order as the matrix transform and keymap.
 
 After Studio has stored a runtime keymap, later edits to `mwv1.keymap` are not applied until **Restore Stock Settings** is selected in Studio.
+
+If an older runtime keymap hides the unlock binding, flash `mwv1_left_studio_recovery` temporarily. Connect in Studio, select **Restore Stock Settings**, and then reflash the normal `mwv1_left` firmware. This recovery image disables Studio locking and must not be left installed for normal use.
+
+If Studio still cannot connect, use the `settings_reset` firmware as described below and then reflash both normal firmware halves. This also clears the split and host bonds.
+
+Mouse support changes the Bluetooth HID descriptor. After flashing this version, remove the old `MWV1` entry from the host, clear the selected Bluetooth profile, and pair it again before testing mouse movement over BLE. USB mouse movement works without Bluetooth re-pairing.
 
 ## Pairing problems and settings reset
 
