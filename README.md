@@ -71,6 +71,8 @@ The base layer follows the physical positions of a German ISO layout. The operat
 
 The five positions that were empty in `keyboard-layout.json` are assigned to Studio unlock, screenshot, an additional Backspace, direct USB output, and the context menu. The labels `Layer Up` and `Layer Down` from the original JSON are treated as `Page Up` and `Page Down` (German `Bild auf`/`Bild ab`).
 
+Five additional reserved layers are available for free configuration and naming in ZMK Studio. Together with the four stock layers, Studio therefore exposes nine layers.
+
 ## Building
 
 Push the repository to GitHub. `.github/workflows/build.yml` invokes the current ZMK workflow, and `build.yaml` produces:

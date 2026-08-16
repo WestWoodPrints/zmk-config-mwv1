@@ -79,5 +79,26 @@
                 &to BASE    &trans         &trans       &trans       &trans       &trans       &trans &trans   &trans       &trans       &trans       &trans       &trans       &trans       &trans &trans
             >;
         };
+
+        /* Diese leeren Ebenen stehen ausschließlich zur freien Belegung in ZMK Studio bereit. */
+        studio_layer_1 {
+            status = "reserved";
+        };
+
+        studio_layer_2 {
+            status = "reserved";
+        };
+
+        studio_layer_3 {
+            status = "reserved";
+        };
+
+        studio_layer_4 {
+            status = "reserved";
+        };
+
+        studio_layer_5 {
+            status = "reserved";
+        };
     };
 };
