@@ -1,7 +1,12 @@
 #define BASE 0
-#define NAVIGATION 1
-#define MOUSE 2
-#define FUNCTION 3
+#define L1 1
+#define L2 2
+#define L3 3
+#define L4 4
+#define L5 5
+#define NAVIGATION 6
+#define MOUSE 7
+#define FUNCTION 8
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
@@ -10,6 +15,30 @@
 #include <dt-bindings/zmk/pointing.h>
 
 / {
+    behaviors {
+        /* Halten aktiviert den Layer vorübergehend, Doppeltippen wechselt dauerhaft. */
+        nav_td: navigation_tap_dance {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&mo NAVIGATION>, <&to NAVIGATION>;
+        };
+
+        mouse_td: mouse_tap_dance {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&mo MOUSE>, <&to MOUSE>;
+        };
+
+        fn_td: function_tap_dance {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&mo FUNCTION>, <&to FUNCTION>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -25,13 +54,69 @@
              * |STUDIO|CAPS| A | S | D | F | G | DEL | BSPC| H | J | K | L | Ö | Ä | #' |
              * |PSCRN|SFT | Y | X | C | V | B |PG UP |PG DN| N | M | , | . | - |SFT|HOME|
              * |BASE|CTL |GUI |ALT |NAV |SPC |BSPC|MOUSE| ENT |USB |SPC|MENU|ALTGR|FN|CTL|END|
-             */
+            */
             bindings = <
-                &kp ESC          &kp GRAVE    &kp N1      &kp N2     &kp N3     &kp N4     &kp N5              &kp N6          &kp N7     &kp N8      &kp N9     &kp N0     &kp MINUS  &kp EQUAL
-                &kp NUBS         &kp TAB      &kp Q       &kp W      &kp E      &kp R      &kp T               &kp Z           &kp U      &kp I       &kp O      &kp P      &kp LBKT   &kp RBKT
-                &studio_unlock   &kp CAPSLOCK &kp A       &kp S      &kp D      &kp F      &kp G      &kp DEL   &kp BSPC        &kp H           &kp J      &kp K      &kp L      &kp SEMI   &kp SQT   &kp NUHS
-                &kp PSCRN        &kp LSHFT    &kp Y       &kp X      &kp C      &kp V      &kp B      &kp PG_UP &kp PG_DN       &kp N           &kp M      &kp COMMA  &kp DOT    &kp FSLH   &kp RSHFT &kp HOME
-                &to BASE         &kp LCTRL    &kp LGUI    &kp LALT   &mo NAVIGATION &kp SPACE &kp BSPC &mo MOUSE &kp RET       &out OUT_USB     &kp SPACE  &kp K_APP  &kp RALT   &mo FUNCTION &kp RCTRL &kp END
+                &kp ESC         &kp GRAVE     &kp N1    &kp N2    &kp N3   &kp N4     &kp N5                         &kp N6        &kp N7     &kp N8     &kp N9    &kp N0    &kp MINUS  &kp EQUAL
+                &kp NUBS        &kp TAB       &kp Q     &kp W     &kp E    &kp R      &kp T                          &kp Z         &kp U      &kp I      &kp O     &kp P     &kp LBKT   &kp RBKT
+                &studio_unlock  &kp CAPSLOCK  &kp A     &kp S     &kp D    &kp F      &kp G     &kp DEL    &kp BSPC  &kp H         &kp J      &kp K      &kp L     &kp SEMI  &kp SQT    &kp NUHS
+                &kp PSCRN       &kp LSHFT     &kp Y     &kp X     &kp C    &kp V      &kp B     &to L1     &to BASE  &kp N         &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT  &kp HOME
+                &to BASE        &kp LCTRL     &kp LGUI  &kp LALT  &nav_td  &kp SPACE  &kp BSPC  &mouse_td  &kp RET   &out OUT_USB  &kp SPACE  &kp K_APP  &kp RALT  &fn_td    &kp RCTRL  &kp END
+            >;
+        };
+
+        /* Diese Ebenen lassen sich in ZMK Studio frei belegen und über die inneren Tasten wechseln. */
+        studio_layer_1 {
+            display-name = "L1";
+            bindings = <
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans                        &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans                        &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans      &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans  &to L2      &to BASE  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &to BASE  &trans  &trans  &trans  &trans  &trans  &trans  &trans      &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        studio_layer_2 {
+            display-name = "L2";
+            bindings = <
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans  &to L3      &to L1  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &to BASE  &trans  &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        studio_layer_3 {
+            display-name = "L3";
+            bindings = <
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans  &to L4      &to L2  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &to BASE  &trans  &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        studio_layer_4 {
+            display-name = "L4";
+            bindings = <
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans  &to L5      &to L3  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &to BASE  &trans  &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        studio_layer_5 {
+            display-name = "L5";
+            bindings = <
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans                              &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans                              &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans              &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans  &to NAVIGATION      &to L4  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &to BASE  &trans  &trans  &trans  &trans  &trans  &trans  &trans              &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
 
@@ -40,11 +125,11 @@
 
             /* IJKL bilden einen umgekehrten T-Pfeilblock; U/O und P/Ü ergänzen die Navigation. */
             bindings = <
-                &trans &trans &trans &trans &trans &trans &trans        &trans &trans       &trans     &trans      &trans      &trans       &trans
-                &trans &trans &trans &trans &trans &trans &trans        &trans &kp HOME     &kp UP     &kp END     &kp PG_UP   &kp PG_DN    &trans
-                &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans       &kp LEFT   &kp DOWN   &kp RIGHT   &trans       &trans &trans
-                &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans       &trans     &trans     &trans      &trans       &trans &trans
-                &to BASE &trans &trans &trans &trans &trans &trans &trans &trans &trans     &trans     &trans     &trans      &trans       &trans &trans
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans                         &trans  &trans    &trans    &trans     &trans     &trans     &trans
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans                         &trans  &kp HOME  &kp UP    &kp END    &kp PG_UP  &kp PG_DN  &trans
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans         &trans  &trans  &kp LEFT  &kp DOWN  &kp RIGHT  &trans     &trans     &trans
+                &trans    &trans  &trans  &trans  &trans  &trans  &trans  &to MOUSE      &to L5  &trans  &trans    &trans    &trans     &trans     &trans     &trans
+                &to BASE  &trans  &trans  &trans  &trans  &trans  &trans  &trans         &trans  &trans  &trans    &trans    &trans     &trans     &trans     &trans
             >;
         };
 
@@ -54,13 +139,13 @@
             /*
              * IJKL bewegen den Zeiger, U/O klicken links/rechts und H klickt die Mitte.
              * WASD scrollen; Z/P bedienen die üblichen Zurück-/Vorwärts-Maustasten.
-             */
+            */
             bindings = <
-                &trans &trans &trans &trans          &trans          &trans           &trans        &trans       &trans          &trans          &trans           &trans          &trans &trans
-                &trans &trans &trans &msc SCRL_UP    &trans          &trans           &trans        &mkp MB4     &mkp LCLK       &mmv MOVE_UP   &mkp RCLK        &mkp MB5        &trans &trans
-                &trans &trans &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_RIGHT &trans     &trans &trans &trans       &mkp MCLK       &mmv MOVE_LEFT &mmv MOVE_DOWN   &mmv MOVE_RIGHT &trans &trans &trans
-                &trans &trans &trans &trans          &trans          &trans           &trans &trans  &trans       &trans          &trans          &trans           &trans          &trans &trans &trans
-                &to BASE &trans &trans &trans        &trans          &trans           &trans &trans  &trans       &trans          &trans          &trans           &trans          &trans &trans &trans
+                &trans    &trans  &trans          &trans          &trans           &trans  &trans                                    &trans     &trans          &trans          &trans           &trans    &trans  &trans
+                &trans    &trans  &trans          &msc SCRL_UP    &trans           &trans  &trans                                    &mkp MB4   &mkp LCLK       &mmv MOVE_UP    &mkp RCLK        &mkp MB5  &trans  &trans
+                &trans    &trans  &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_RIGHT  &trans  &trans  &trans            &trans          &mkp MCLK  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans    &trans  &trans
+                &trans    &trans  &trans          &trans          &trans           &trans  &trans  &to FUNCTION      &to NAVIGATION  &trans     &trans          &trans          &trans           &trans    &trans  &trans
+                &to BASE  &trans  &trans          &trans          &trans           &trans  &trans  &trans            &trans          &trans     &trans          &trans          &trans           &trans    &trans  &trans
             >;
         };
 
@@ -70,35 +155,15 @@
             /*
              * Die Ziffernreihe liefert F1 bis F12. Daneben liegen Studio,
              * Bootloader, Bluetooth-Profile, Ausgabewahl und Mediensteuerung.
-             */
+            */
             bindings = <
-                &bootloader &studio_unlock &kp F1 &kp F2 &kp F3 &kp F4 &kp F5        &kp F6       &kp F7       &kp F8       &kp F9       &kp F10      &kp F11      &kp F12
-                &bt BT_CLR  &out OUT_USB   &out OUT_BLE &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3    &bt BT_SEL 4 &kp C_PREV   &kp C_PP     &kp C_NEXT   &kp C_MUTE   &kp C_VOL_DN &kp C_VOL_UP
-                &trans      &trans         &trans       &trans       &trans       &trans       &trans &trans   &trans       &trans       &trans       &trans       &trans       &trans       &trans &trans
-                &trans      &trans         &trans       &trans       &trans       &trans       &trans &kp C_BRI_INC &kp C_BRI_DEC &trans &trans   &trans       &trans       &trans       &trans &trans
-                &to BASE    &trans         &trans       &trans       &trans       &trans       &trans &trans   &trans       &trans       &trans       &trans       &trans       &trans       &trans &trans
+                &bootloader  &studio_unlock  &kp F1        &kp F2        &kp F3        &kp F4        &kp F5                                          &kp F6  &kp F7      &kp F8    &kp F9      &kp F10  &kp F11  &kp F12
+                &bt BT_CLR   &out OUT_USB    &out OUT_BLE  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &kp C_VOL_UP                                    &trans  &trans      &trans    &trans      &trans   &trans   &trans
+                &trans       &trans          &trans        &trans        &trans        &trans        &kp C_MUTE    &kp C_BRI_INC      &kp C_BRI_DEC  &trans  &kp C_PREV  &kp C_PP  &kp C_NEXT  &trans   &trans   &trans
+                &trans       &trans          &trans        &trans        &trans        &trans        &kp C_VOL_DN  &to BASE           &to MOUSE      &trans  &trans      &trans    &trans      &trans   &trans   &trans
+                &to BASE     &trans          &trans        &trans        &trans        &trans        &trans        &trans             &trans         &trans  &trans      &trans    &trans      &trans   &trans   &trans
             >;
         };
 
-        /* Diese leeren Ebenen stehen ausschließlich zur freien Belegung in ZMK Studio bereit. */
-        studio_layer_1 {
-            status = "reserved";
-        };
-
-        studio_layer_2 {
-            status = "reserved";
-        };
-
-        studio_layer_3 {
-            status = "reserved";
-        };
-
-        studio_layer_4 {
-            status = "reserved";
-        };
-
-        studio_layer_5 {
-            status = "reserved";
-        };
     };
 };

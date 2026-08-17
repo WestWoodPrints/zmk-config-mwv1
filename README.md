@@ -73,6 +73,10 @@ The five positions that were empty in `keyboard-layout.json` are assigned to Stu
 
 Five additional reserved layers are available for free configuration and naming in ZMK Studio. Together with the four stock layers, Studio therefore exposes nine layers.
 
+## KeyFab
+
+Import `mwv1-keyfab.json` in the final **Import / Export** step of [KeyFab](https://jaroslaw-weber.github.io/keyfab/). Use the general project import there, not the separate KLE or physical-layout import. The file contains the custom 76-key geometry, all four configured layers, the ISO-DE Shift/AltGr legends, and five empty Studio layers.
+
 ## Building
 
 Push the repository to GitHub. `.github/workflows/build.yml` invokes the current ZMK workflow, and `build.yaml` produces:
